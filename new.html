@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IdeaSpark 3.0 - AI-Powered Innovation Revolution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <style>
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0a0a0a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        header.scrolled {
+            background-color: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #00ffff;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #00ffff;
+            color: #0a0a0a;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.4s;
+            animation-fill-mode: both;
+        }
+
+        .cta-button:hover {
+            background-color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            opacity: 0.1;
+            animation: gradientFlow 10s ease infinite;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: #111111;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #00ffff;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 100px 0;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+
+        .step {
+            text-align: center;
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #00ffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: #0a0a0a;
+        }
+
+        .step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Idea Generator Section */
+        .idea-generator {
+            padding: 100px 0;
+            background-color: #111111;
+        }
+
+        .idea-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .idea-form input,
+        .idea-form select,
+        .idea-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            background-color: #1a1a1a;
+            border: none;
+            border-radius: 5px;
+            color: #ffffff;
+        }
+
+        .idea-form button {
+            background-color: #00ffff;
+            color: #0a0a0a;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .idea-form button:hover {
+            background-color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .generated-idea {
+            margin-top: 50px;
+            padding: 30px;
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .testimonial {
+            padding: 30px;
+        }
+
+        .testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+        }
+
+        /* AI Insights Section */
+        .ai-insights {
+            padding: 100px 0;
+            background-color: #111111;
+        }
+
+        .insight-card {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .insight-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0a0a0a;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .footer-links li {
+            margin: 0 15px;
+        }
+
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #00ffff;
+        }
+
+        .social-icons {
+            margin-bottom: 20px;
+        }
+
+        .social-icons a {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #00ffff;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Interactive Elements */
+        .interactive-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: #00ffff;
+            border-radius: 50%;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .features-grid,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .step {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="preloader">
+        <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_uwR49r.json" background="transparent" speed="0.5" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+    </div>
+
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">
+                <lottie-player class="logo-icon" src="https://assets2.lottiefiles.com/packages/lf20_uwR49r.json" background="transparent" speed="1" loop autoplay></lottie-player>
+                IdeaSpark
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#idea-generator">Idea Generator</a></li>
+                <li><a href="#ai-insights">AI Insights</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-content">
+                <h1>Ignite Your Innovation with AI</h1>
+                <p>IdeaSpark harnesses the power of artificial intelligence to revolutionize idea generation across industries.</p>
+                <a href="#idea-generator" class="cta-button">Generate Your Idea</a>
+            </div>
+            <div class="hero-bg"></div>
+            <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_qpsnmykx.json" background="transparent" speed="1" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; pointer-events: none;" loop autoplay></lottie-player>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Unleash Creativity with AI</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🧠</div>
+                        <h3>AI-Powered Ideation</h3>
+                        <p>Our advanced AI algorithms generate unique project ideas tailored to your interests and industry trends.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3>Cross-Industry Innovation</h3>
+                        <p>Discover groundbreaking ideas by combining concepts from various sectors and disciplines.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Real-time Market Analysis</h3>
+                        <p>Stay ahead of the curve with AI-driven insights on market trends and emerging opportunities.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3>Idea Validation</h3>
+                        <p>Instantly assess the potential of your ideas with our AI-powered feasibility analysis.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <h2 class="section-title">How IdeaSpark Works</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-icon">1</div>
+                        <h3>Input Your Criteria</h3>
+                        <p>Share your interests, industry, and project goals with our AI.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">2</div>
+                        <h3>AI Idea Generation</h3>
+                        <p>Our advanced algorithms create unique, tailored project ideas.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">3</div>
+                        <h3>Explore and Refine</h3>
+                        <p>Dive into your generated ideas and refine them with AI assistance.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">4</div>
+                        <h3>Validate and Launch</h3>
+                        <p>Use our AI-powered tools to validate and kickstart your project.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="idea-generator" class="idea-generator">
+            <div class="container">
+                <h2 class="section-title">Generate Your Next Big Idea</h2>
+                <div class="idea-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <select id="industry-select" required>
+                        <option value="">Select Your Industry</option>
+                        <option value="technology">Technology</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="education">Education</option>
+                        <option value="finance">Finance</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="sustainability">Sustainability</option>
+                    </select>
+                    <textarea placeholder="Describe your interests and goals (optional)" rows="4"></textarea>
+                    <button type="submit" id="generate-idea">Generate Idea</button>
+                </div>
+                <div class="generated-idea" style="display: none;">
+                    <h3>Your Generated Ideas:</h3>
+                    <ul id="idea-output"></ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonials">
+            <div class="container">
+                <h2 class="section-title">Success Stories</h2>
+                <div class="testimonial-slider">
+                    <div class="testimonial">
+                        <p class="testimonial-text">"IdeaSpark's AI-generated idea led to our startup's breakthrough product. We're now industry leaders thanks to this innovative platform!"</p>
+                        <p class="testimonial-author">- Sarah Chen, Tech Entrepreneur</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ai-insights" class="ai-insights">
+            <div class="container">
+                <h2 class="section-title">AI-Powered Market Insights</h2>
+                <div class="insight-card">
+                    <h3>Emerging Technology Trends</h3>
+                    <p id="tech-trends"></p>
+                </div>
+                <div class="insight-card">
+                    <h3>Industry Disruptions</h3>
+                    <p id="industry-disruptions"></p>
+                </div>
+                <div class="insight-card">
+                    <h3>Investment Opportunities</h3>
+                    <p id="investment-opportunities"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#idea-generator">Idea Generator</a></li>
+                <li><a href="#ai-insights">AI Insights</a></li>
+            </ul>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2024 IdeaSpark. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="interactive-bg"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.preloader').style.display = 'none';
+            }, 2000);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelector(anchor.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+       
+
+        document.addEventListener('mousemove', (e) => {
+            createParticle(e.clientX, e.clientY);
+        });
+
+        // Idea Generator
+        const ideas = {
+            technology: [
+                "AI-powered personal stylist app",
+    "Blockchain-based voting system",
+    "Smart home energy optimization platform",
+    "AR-enhanced language learning tool",
+    "Quantum computing simulation software",
+    "AI-driven mental health diagnostic tool",
+    "Blockchain-secured supply chain management",
+    "Smart agriculture monitoring system",
+    "Virtual reality fitness training application",
+    "Wearable health monitoring device",
+    "Autonomous drone delivery service",
+    "Blockchain-based digital identity verification",
+    "AI-powered customer service chatbot",
+    "Smart traffic management system",
+    "Augmented reality museum tours",
+    "Predictive maintenance for industrial equipment",
+    "AI-enhanced personalized news feed",
+    "Blockchain-based intellectual property protection",
+    "IoT-based smart city infrastructure",
+    "Machine learning for fraud detection in finance",
+    "AI-powered language translation app",
+    "Blockchain-based charity donation platform",
+    "AI-assisted medical imaging analysis",
+    "Smart home security system with facial recognition",
+    "Virtual reality educational simulations",
+    "Blockchain-based contract management system",
+    "AI-driven personalized learning platform",
+    "Remote patient monitoring system",
+    "Smart waste management solution",
+    "Augmented reality gaming platform",
+    "Voice-controlled smart assistant",
+    "AI-based music composition tool",
+    "Blockchain-based data storage solution",
+    "Wearable fitness tracker with health insights",
+    "Autonomous vehicle navigation system",
+    "AI-driven social media analytics",
+    "Blockchain-based supply chain transparency",
+    "Smart inventory management system",
+    "Augmented reality interior design app",
+    "Virtual reality therapy sessions",
+    "AI-powered financial planning tool",
+    "Blockchain-secured personal data management",
+    "Smart home appliance control system",
+    "AI-enhanced personal finance advisor",
+    "Blockchain-based loyalty rewards platform",
+    "IoT-enabled home automation system",
+    "Virtual reality remote workspaces",
+    "AI-driven content recommendation engine",
+    "Blockchain-based insurance claims processing",
+    "Smart wearable for health diagnostics"
+            ],
+            healthcare: [
+                "AI-driven early disease detection wearable",
+    "Personalized nutrition planning app",
+    "Telemedicine platform for mental health",
+    "Robotic assistance for elderly care",
+    "Gene therapy delivery system",
+    "AI-powered diagnostic imaging tool",
+    "Wearable device for real-time blood glucose monitoring",
+    "Blockchain-based patient health record system",
+    "Telehealth platform with virtual physical therapy",
+    "AR-assisted surgical planning and training",
+    "Smart inhaler with medication tracking",
+    "AI-driven mental health chatbots for therapy",
+    "Remote patient monitoring with IoT devices",
+    "Personalized drug discovery using machine learning",
+    "Wearable ECG monitor with real-time alerts",
+    "AI-enhanced mental health analytics platform",
+    "Blockchain-based clinical trials management",
+    "Telemedicine app with integrated mental health support",
+    "Smart bandage with infection detection sensors",
+    "Virtual reality exposure therapy for phobias",
+    "AI-powered predictive analytics for hospital resource management",
+    "Robotic exoskeleton for rehabilitation therapy",
+    "Wearable hydration tracker with personalized recommendations",
+    "AI-driven telemedicine triage system",
+    "Blockchain-based patient consent management",
+    "Smart insulin pump with real-time glucose monitoring",
+    "AI-powered personalized cancer treatment plans",
+    "Wearable device for sleep apnea monitoring",
+    "Telemedicine platform with language translation",
+    "AI-enhanced genetic data analysis",
+    "Blockchain-based drug traceability system",
+    "Smart patch for continuous health monitoring",
+    "AI-driven virtual health coaching",
+    "Wearable device for detecting early signs of stroke",
+    "Telehealth platform for remote chronic disease management",
+    "AI-powered drug interaction checker",
+    "Blockchain-based healthcare data sharing platform",
+    "Smart eyeglasses with vision correction and health tracking",
+    "AI-driven personalized fitness and wellness programs",
+    "Wearable device for monitoring mental health biomarkers",
+    "Telemedicine app with real-time symptom analysis",
+    "Smart contact lenses with health monitoring features",
+    "AI-enhanced remote dermatology diagnostics",
+    "Blockchain-based medical device tracking",
+    "Wearable device for continuous heart rate monitoring",
+    "AI-driven predictive models for outbreak management",
+    "Telemedicine platform with integrated lifestyle tracking",
+    "Smart wound care system with real-time feedback",
+    "AI-powered personalized treatment recommendations",
+    "Blockchain-based health insurance claims processing"
+            ],
+            education: [
+                "VR-based historical reenactment lessons",
+    "AI tutor for personalized learning",
+    "Gamified STEM education platform",
+    "Collaborative online research tool",
+    "Emotion recognition for improved teaching",
+    "AR-enhanced anatomy lessons for medical students",
+    "AI-powered essay grading and feedback system",
+    "Interactive language learning with virtual conversation partners",
+    "Blockchain-based credential verification system",
+    "Gamified math problem-solving platform",
+    "AI-driven adaptive learning platforms",
+    "VR simulations for scientific experiments",
+    "Online platform for virtual field trips",
+    "AI-based plagiarism detection tool",
+    "Collaborative coding environment for students",
+    "Real-time language translation for classroom discussions",
+    "AI-enhanced curriculum development tools",
+    "VR-based career exploration experiences",
+    "Interactive digital textbooks with multimedia content",
+    "AI-powered personalized reading recommendations",
+    "Online platform for peer-reviewed project submissions",
+    "AR-guided practical skills training",
+    "AI-driven student performance analytics",
+    "Interactive simulations for engineering education",
+    "Blockchain-based education records management",
+    "VR-enabled immersive learning environments",
+    "AI-assisted educational content creation",
+    "Gamified social studies lessons",
+    "Virtual reality for hands-on laboratory experience",
+    "AI-powered teacher training and professional development",
+    "Collaborative online problem-solving platforms",
+    "AR-based interactive historical timelines",
+    "AI-driven student engagement tracking",
+    "Virtual labs for chemistry experiments",
+    "Blockchain-based student achievement tracking",
+    "AI-enhanced learning disabilities support tools",
+    "VR environments for interactive storytelling",
+    "Interactive e-learning modules with real-time feedback",
+    "AI-powered course recommendation engines",
+    "Gamified language learning challenges",
+    "AR-based math visualization tools",
+    "Virtual reality for environmental science education",
+    "AI-driven personalized test preparation",
+    "Blockchain-based secure online exams",
+    "AR-enhanced art and design education",
+    "VR simulations for medical training",
+    "Collaborative virtual science projects",
+    "AI-powered interactive textbooks",
+    "Gamified history lessons with virtual reconstructions",
+    "Virtual classrooms with real-time collaboration tools"
+            ],
+            finance: [
+                "Decentralized lending platform",
+    "AI-powered investment advisor",
+    "Blockchain-based supply chain financing",
+    "Predictive analytics for fraud detection",
+    "Gamified financial literacy app",
+    "Blockchain-based cross-border payments system",
+    "AI-driven portfolio management",
+    "Smart contract-based insurance claims processing",
+    "Real-time cryptocurrency trading analytics",
+    "Personalized financial planning with AI",
+    "Blockchain-based digital asset management",
+    "AI-enhanced risk assessment tools",
+    "Automated tax optimization platform",
+    "Decentralized financial (DeFi) yield farming",
+    "AI-powered credit scoring system",
+    "Blockchain-secured identity verification for banking",
+    "Predictive modeling for market trends",
+    "Smart contracts for automated trade settlements",
+    "AI-driven budgeting and expense tracking",
+    "Blockchain-based peer-to-peer insurance",
+    "Virtual financial advisor for retirement planning",
+    "Real-time transaction monitoring with AI",
+    "AI-enhanced investment risk analysis",
+    "Blockchain-based asset tokenization",
+    "Decentralized cryptocurrency exchange",
+    "AI-powered loan underwriting system",
+    "Predictive analytics for stock market forecasting",
+    "Smart contract-based escrow services",
+    "AI-driven financial forecasting tools",
+    "Blockchain-based digital payments solutions",
+    "Real-time expense categorization with AI",
+    "Decentralized crowdfunding platform",
+    "AI-enhanced wealth management strategies",
+    "Blockchain-based real estate investment platform",
+    "Predictive analytics for investment opportunities",
+    "Smart contracts for automated royalty payments",
+    "AI-powered market sentiment analysis",
+    "Blockchain-based voting system for shareholder decisions",
+    "Real-time risk management with AI",
+    "AI-driven personal finance recommendations",
+    "Blockchain-based trade finance solutions",
+    "Decentralized asset-backed lending platform",
+    "AI-enhanced financial health diagnostics",
+    "Smart contract-based charity donations",
+    "Blockchain-secured transaction history",
+    "Predictive analytics for consumer spending",
+    "AI-driven investment strategy optimization",
+    "Decentralized platform for corporate bonds",
+    "Real-time currency exchange rate analytics",
+    "AI-powered financial anomaly detection"
+            ],
+            entertainment: [
+            "Interactive storytelling platform",
+            "AI-generated music composition tool",
+            "VR concert experience platform",
+            "Personalized content recommendation engine",
+            "Augmented reality theme park experiences",
+            "AI-powered game design assistant",
+            "Blockchain-based digital collectibles marketplace",
+            "Virtual reality escape room experiences",
+            "AI-driven interactive movie experiences",
+            "Augmented reality treasure hunts",
+            "VR-enabled immersive art installations",
+            "AI-powered video content creation tools",
+            "Interactive 360-degree music videos",
+            "Blockchain-secured ownership of digital art",
+            "Virtual reality sports simulations",
+            "AI-enhanced voice synthesis for games",
+            "Augmented reality fashion shows",
+            "Personalized virtual reality travel experiences",
+            "AI-driven narrative generation for games",
+            "Interactive live streaming with real-time audience participation",
+            "VR-based historical simulations",
+            "AI-powered virtual talent shows",
+            "Blockchain-based fan engagement platforms",
+            "AR-enhanced movie theater experiences",
+            "Virtual reality based educational games",
+            "AI-generated film scriptwriting assistant",
+            "Interactive storytelling with AI characters",
+            "Augmented reality music learning tools",
+            "VR-based mental wellness and relaxation experiences",
+            "AI-driven personalized TV show recommendations",
+            "Virtual reality game design workshops",
+            "Blockchain-based royalties management for digital content",
+            "Interactive augmented reality concerts",
+            "AI-powered voice-controlled entertainment systems",
+            "VR-based interactive theater performances",
+            "Augmented reality book reading experiences",
+            "AI-driven music playlist curation",
+            "Blockchain-secured virtual reality assets",
+            "Virtual reality dance and choreography experiences",
+            "AI-generated immersive soundscapes",
+            "Augmented reality interactive museum tours",
+            "AI-powered creative writing prompts and tools",
+            "VR-based adventure travel experiences",
+            "Blockchain-based ticketing systems for events",
+            "Personalized virtual reality art galleries",
+            "AI-enhanced live event production tools",
+            "Augmented reality interactive board games",
+            "Virtual reality based art creation platforms",
+            "AI-driven personalized interactive documentaries"
+            ],
+            sustainability: [
+            "AI-optimized renewable energy grid",
+            "Vertical farming automation system",
+            "Ocean plastic cleanup drone network",
+            "Carbon footprint tracking and offset app",
+            "Sustainable material discovery platform",
+            "Blockchain-based carbon credit trading system",
+            "AI-powered waste sorting and recycling system",
+            "Smart grid technology for energy efficiency",
+            "Augmented reality for eco-friendly home renovations",
+            "IoT-based water usage monitoring and conservation",
+            "AI-driven climate change impact forecasting",
+            "Renewable energy-powered smart transportation",
+            "Vertical garden systems for urban environments",
+            "AI-assisted precision agriculture for sustainable farming",
+            "Blockchain-secured sustainable supply chain management",
+            "Green building materials database with AI recommendations",
+            "Energy-efficient smart home systems",
+            "AI-powered environmental risk assessment tools",
+            "Sustainable packaging innovation platform",
+            "Remote sensing for deforestation monitoring",
+            "IoT-enabled smart waste management systems",
+            "AI-driven biodiversity monitoring and protection",
+            "Eco-friendly public transportation solutions",
+            "Renewable energy storage solutions with AI optimization",
+            "AI-powered pollution tracking and management",
+            "Blockchain-based sustainable investment platforms",
+            "Smart irrigation systems for water conservation",
+            "AI-enhanced urban planning for sustainability",
+            "Renewable energy integration with electric grids",
+            "IoT-based air quality monitoring and alerts",
+            "AI-driven oceanographic research and conservation",
+            "Sustainable seafood traceability platform",
+            "Energy-efficient smart lighting solutions",
+            "Blockchain-based environmental impact reporting",
+            "AI-assisted waste-to-energy conversion systems",
+            "Green infrastructure planning and design tools",
+            "Renewable energy-powered agricultural equipment",
+            "AI-driven sustainable forestry management",
+            "Smart home energy management systems",
+            "Blockchain-based eco-certification for products",
+            "AI-powered climate change adaptation strategies",
+            "Sustainable urban mobility solutions",
+            "IoT-enabled smart water treatment systems",
+            "AI-driven waste reduction and circular economy solutions",
+            "Renewable energy forecasting and grid balancing tools",
+            "Blockchain-based resource recycling and management",
+            "AI-assisted energy efficiency audits",
+            "Sustainable food production and supply chain solutions",
+            "Smart eco-friendly city infrastructure",
+            "AI-powered climate resilience planning tools",
+            "Blockchain-secured renewable energy trading platforms"
+            ]
+        };
+
+        document.getElementById('generate-idea').addEventListener('click', (e) => {
+            e.preventDefault();
+            const industry = document.getElementById('industry-select').value;
+            const selectedIdeas = ideas[industry];
+            
+            if (selectedIdeas) {
+                const ideaList = document.getElementById('idea-output');
+                ideaList.innerHTML = '';
+                selectedIdeas.forEach(idea => {
+                    const li = document.createElement('li');
+                    li.textContent = idea;
+                    ideaList.appendChild(li);
+                });
+                document.querySelector('.generated-idea').style.display = 'block';
+            }
+        });
+
+        // Testimonial Slider
+        const testimonials = [
+            {
+                text: "IdeaSpark's AI-generated idea led to our startup's breakthrough product. We're now industry leaders thanks to this innovative platform!",
+                author: "Sarah Chen, Tech Entrepreneur"
+            },
+            {
+                text: "As a researcher, IdeaSpark has been invaluable in identifying novel areas of study. It's revolutionized our approach to innovation.",
+                author: "Dr. James Rodriguez, Research Scientist"
+            },
+            {
+                text: "IdeaSpark helped us pivot our business model during challenging times. The AI-driven insights were spot-on and incredibly valuable.",
+                author: "Emily Nakamura, CEO"
+            }
+        ];
+
+        let currentTestimonial = 0;
+
+        function updateTestimonial() {
+            const { text, author } = testimonials[currentTestimonial];
+            document.querySelector('.testimonial-text').textContent = text;
+            document.querySelector('.testimonial-author').textContent = `- ${author}`;
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+        }
+
+        setInterval(updateTestimonial, 5000);
+
+        // AI Insights
+        const insights = {
+            techTrends: [
+                "Edge AI for real-time processing",
+                "Quantum computing breakthroughs",
+                "Extended Reality (XR) integration",
+                "Autonomous vehicles advancements",
+                "5G and 6G network implementations"
+            ],
+            industryDisruptions: [
+                "Decentralized Finance (DeFi) revolution",
+                "Telemedicine and remote healthcare",
+                "Sustainable energy transitions",
+                "Personalized education platforms",
+                "AI-driven content creation"
+            ],
+            investmentOpportunities: [
+                "Green technology startups",
+                "Cybersecurity solutions",
+                "Space exploration ventures",
+                "Mental health tech innovations",
+                "Synthetic biology advancements"
+            ]
+        };
+
+        function updateInsights() {
+            document.getElementById('tech-trends').innerHTML = insights.techTrends.join('<br>');
+            document.getElementById('industry-disruptions').innerHTML = insights.industryDisruptions.join('<br>');
+            document.getElementById('investment-opportunities').innerHTML = insights.investmentOpportunities.join('<br>');
+        }
+
+        updateInsights();
+
+        
+    </script>
+</body>
+</html>
